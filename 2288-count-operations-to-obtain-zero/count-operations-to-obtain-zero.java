@@ -9,10 +9,9 @@ class Solution {
             return op;
         if(num1>num2)
             num1=num1-num2;
-        else if(num1<num2)
+        else
             num2=num2-num1;
-        else if(num1==num2)
-            num1=num2-num1;
+       
         return helper(num1,num2,op+1);
     }
 }
