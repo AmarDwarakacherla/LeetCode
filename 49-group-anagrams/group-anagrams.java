@@ -1,29 +1,27 @@
 class Solution {
-    public List<List<String>> groupAnagrams(String[] strs) {
-       Map<String, List<String>> map = new HashMap<>();
-        for (String s : strs) {
-            String ana = isAna(s);
-            List<String> list = map.getOrDefault(ana, new ArrayList<>());
-            list.add(s);
-            map.put(ana, list);
+    public List<List<String>> groupAnagrams(String[] arr) {
+    Map<String,Integer> map  = new HashMap<>();
+        List<List<String>> res = new ArrayList<>();
+        for(String str : arr){
+            String key = isAna(str);
+            if(!map.containsKey(key)){
+                map.put(key,res.size());
+                res.add(new ArrayList<>());
+            }
+            res.get(map.get(key)).add(str);
         }
-        return new ArrayList<>(map.values());
-        
+        return res;
+
     }
     public String isAna(String s){
-        int[] count = new int[26];
-        for(char c:s.toCharArray())
-        {
-            count[c-'a']++;
+        StringBuilder sb = new StringBuilder();
+        int[] freq = new int[26];
+        for(char ch : s.toCharArray()){
+            freq[ch-'a']++;
         }
-        StringBuilder str = new StringBuilder();
-        for(int i=0;i<26;i++)
-        {
-            if(count[i]!=0)
-            {
-                str.append((char)('a'+i)).append(count[i]);
-            }
+        for(int i=0;i<26;i++){
+            sb.append(freq[i]).append("#");
         }
-        return str.toString();
+        return sb.toString();
     }
 }
