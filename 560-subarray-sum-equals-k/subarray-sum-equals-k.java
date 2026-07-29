@@ -1,15 +1,14 @@
 class Solution {
     public int subarraySum(int[] nums, int k) {
-        int count = 0;
-        HashMap<Integer,Integer> freq = new HashMap<>();
-        freq.put(0,1);
-        int prefixsum = 0;
-        for(int i : nums){
-            prefixsum += i;
-            if(freq.containsKey(prefixsum-k)){
-                count += freq.get(prefixsum-k);
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0,1);
+        int sum = 0, count = 0;
+        for(int num : nums){
+            sum += num;
+            if(map.containsKey(sum-k)){
+                count += map.get(sum-k);
             }
-            freq.put(prefixsum,freq.getOrDefault(prefixsum,0)+1);
+            map.put(sum,map.getOrDefault(sum,0)+1);
         }
         return count;
     }
