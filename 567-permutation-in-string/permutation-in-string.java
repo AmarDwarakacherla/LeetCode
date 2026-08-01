@@ -8,13 +8,15 @@ class Solution {
             s1Freq[s1.charAt(i)-'a']++;
             s2Freq[s2.charAt(i)-'a']++;
         }
-        for(int i=0;i<s2.length()-s1.length();i++){
+        for(int i=0;i<=s2.length()-s1.length();i++){
             if(Arrays.equals(s1Freq,s2Freq)){
                 return true;
             }
-            s2Freq[s2.charAt(i)-'a']--;
-            s2Freq[s2.charAt(i+s1.length())-'a']++;
+            if(i<s2.length()-s1.length()){
+                s2Freq[s2.charAt(i)-'a']--;
+                s2Freq[s2.charAt(i+s1.length())-'a']++;
+            }
         }
-        return Arrays.equals(s1Freq,s2Freq);
+        return false;
     }
 }
